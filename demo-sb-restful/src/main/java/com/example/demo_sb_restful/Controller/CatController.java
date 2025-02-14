@@ -1,20 +1,21 @@
 package com.bootcamp.demo.demo_sb_restful.controller;
 
-import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootcamp.demo.demo_sb_restful.model.Cat;
 import com.bootcamp.demo.demo_sb_restful.model.CatDatabase;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+// ! RESTful API -> GET/POST/DELETE/PUT/PATCH
+// Control single resource by GET/POST/DELETE/PUT/PATCH
 
 // Controller -> The ways to control Cat resource
 // insert, update, delete, select
@@ -29,22 +30,37 @@ public class CatController {
     return null;
   }
 
+  // Arrays.asList() vs List.of() vs new ArrayList<>()
+
   // Get All Cats
   @GetMapping(value = "/cats")
-  public List<cat> geCats() {
-      return Arrays.asList(CatDatabase.HOME);
+  public List<Cat> getCats() {
+    return List.of(CatDatabase.HOME);
   }
 
-  //get cat by id
-  @GetMapping(value = "/cats")
-  public Cat geCats(@RequestParam Long id) {
+  // Get Cat By id
+  // http://localhost:8082/cat?id=1
+  // Deserialization
+  @GetMapping(value = "/cat")
+  public Cat getCat(@RequestParam Long id) {
     return CatDatabase.find(id).orElse(null);
   }
 
+  // http://localhost:8082/cat?id=1
   @DeleteMapping(value = "/cat")
-  public Boolean deleteCat(RequestParam long id){
-    return CatDatabase
+  public Boolean deleteCat(@RequestParam Long id) {
+    return CatDatabase.delete(id);
   }
-  //hashmap.put()-> if exits, override, 
-  @PutMapping
+
+  // HashMap.put() -> if exists, override, otherwise, create new
+  @PutMapping(value = "/cat")
+  public Boolean updateCat(@RequestParam Long id, @RequestBody Cat cat) {
+    return CatDatabase.update(id, cat);
+  }
+
+  @PatchMapping(value = "/cat/name/{name}")
+  public Boolean patchCatName(@RequestParam Long id, @PathVariable String name) {
+    return CatDatabase.patchName(id, name);
+  }
+
 }
