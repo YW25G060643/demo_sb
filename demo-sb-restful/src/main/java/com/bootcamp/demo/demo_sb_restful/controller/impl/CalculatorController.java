@@ -1,4 +1,4 @@
-package com.bootcamp.demo.demo_sb_restful.controller;
+package com.bootcamp.demo.demo_sb_restful.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
