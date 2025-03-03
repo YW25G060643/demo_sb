@@ -1,13 +1,11 @@
 package com.coin.bc_coin.service.mapper;
 
 import org.springframework.stereotype.Component;
-
 import com.coin.bc_coin.dto.response.CryptoRespDTO;
 import com.coin.bc_coin.model.CryptoCurrency;
 
 @Component
 public class CryptoMapper {
-
     public CryptoRespDTO toCryptoRespDTO(CryptoCurrency entity) {
         return CryptoRespDTO.builder()
             .formattedPrice(formatPrice(entity.getCurrent_price()))
@@ -18,6 +16,6 @@ public class CryptoMapper {
         }
     
         private String formatPrice(double price) {
-            return String.format("$%.2f", price);
+            return "$" + String.format("$%.2f", price);
     }
 }

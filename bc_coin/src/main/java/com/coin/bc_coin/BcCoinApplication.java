@@ -9,5 +9,4 @@ public class BcCoinApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BcCoinApplication.class, args);
 	}
-
 }
