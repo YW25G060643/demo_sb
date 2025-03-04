@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <tr th:each="crypto : ${cryptos}">
-                    <td><img th:src="${crypto.image}" class="crypto-logo" alt="logo"></td>
+                    <td><img th:src="${crypto.LogoUrl}" class="crypto-logo" alt="logo"></td>
                     <td th:text="${crypto.name}"></td>
                     <td th:text="${crypto.symbol.toUpperCase()}"></td>
                     <td>$<span th:text="${#numbers.formatDecimal(crypto.current_price, 1, 2)}"></span></td>
