@@ -8,6 +8,7 @@ import com.coin.bc_coin.model.CryptoCurrency;
 public class CryptoMapper {
     public CryptoRespDTO toCryptoRespDTO(CryptoCurrency entity) {
         return CryptoRespDTO.builder()
+            .name(entity.getName())
             .formattedPrice(formatPrice(entity.getCurrent_price()))
             .changeStatus(entity.getPrice_change_percentage_24h() >= 0 ? "up" : "down")
             .logoUrl(entity.getImage())

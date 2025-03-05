@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CryptoRespDTO {
+    private String name;
     private String formattedPrice;
     private String changeStatus;
     private String logoUrl;
